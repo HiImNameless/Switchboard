@@ -289,3 +289,7 @@ Redis, a task queue, a dedicated scheduler, object storage, vector search, Kuber
 - [pytest documentation](https://docs.pytest.org/en/stable/)
 - [Playwright introduction](https://playwright.dev/docs/intro)
 - [PostgreSQL logical backups](https://www.postgresql.org/docs/current/backup-dump.html)
+
+## Aditional Ideas (Personal Ideas)
+- Hermes and other services that function through multiple instances like syncthing, could have multiple tabs or a way to switch between installs. For example, for hermes there would be one tab for the server side hermes install, desktop hermes and laptop hermes which will all connect to and display the Hermes Dashboard that is hosted on each of the devices. It could also show when a service is unreachable and could also allow for automatic setup/linking or starting the services directly from the interface if the device is reachable from any device with permissions.
+- 
