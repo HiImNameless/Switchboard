@@ -1,8 +1,22 @@
 import './App.css'
 import ServiceItem from './components/ServiceItem.tsx';
 
+class Service{
+  name: string;
+  id: string;
+
+  constructor(name: string, id: string){
+    this.name = name;
+    this.id = id;
+  }
+}
+
 function App() {
-  const serviceItems: string[] = ["Cockpit", "Dockge", "Adguard Home"];
+  const cockpit = new Service("Cockpit ", "cockpit");
+  const dockge = new Service("Dockge ", "dockge");
+  const adguard_home = new Service("Adguard Home ", "adguard-home");
+
+  const serviceItems: string[] = [cockpit.name, dockge.name, adguard_home.name];
   return (
     <>
       <section id="center">
@@ -12,7 +26,7 @@ function App() {
             Switchboard is a  modular central hub application for connecting different <br/>
             systems and hosted services to the same interface for easy access as well as integrating them to work together.
           </p>
-          <br/>
+
           <ServiceItem name={serviceItems.map(string => string)}/> 
         </div>
       </section>
