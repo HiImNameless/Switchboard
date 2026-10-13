@@ -1,12 +1,19 @@
 import React, { useState } from 'react';
 
-function ServiceItem({ name }: {name: string[]}){
-    const [services, setServices] = useState([
-        {id: "cockpit", name: "Cockpit"},
-        {id: "dockge", name: "Dockge"},
-        {id: "adguard_home", name: "Adguard Home"},
+interface ServiceDetail{
+    id: string;
+    name: string;
+}
 
-    ]);
+interface ServiceList{
+    services: ServiceDetail[];
+}
+
+function ServiceItem(name: string) {
+    return <p>{ name }</p>;
+};
+
+function ListServiceItems({services}: ServiceList){
     
     return (
         <div>
@@ -18,7 +25,7 @@ function ServiceItem({ name }: {name: string[]}){
                 ))}
             </ul>
         </div>
-    )
-}
+    );
+};
 
-export default ServiceItem;
+export default ListServiceItems;
