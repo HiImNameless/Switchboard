@@ -1,6 +1,5 @@
 import './App.css'
-import ServiceItem from './components/Services.tsx';
-import ListServiceItems from './components/Services.tsx';
+import {SideBar} from './components/Navigation.tsx';
 
 function App() {
 
@@ -13,13 +12,19 @@ function App() {
 return (
     <>
       <section id="center">
-        <div>
-          <h1>Switchboard</h1>
-          <p>
-            Switchboard is a  modular central hub application for connecting different <br/>
-            systems and hosted services to the same interface for easy access as well as integrating them to work together.
-          </p>
-          <ListServiceItems services={services} /> 
+
+        <SideBar services={services}/>
+        <div className="container">
+          <main className="content">
+            <h1>Switchboard</h1>
+
+            <p>
+              Switchboard is a  modular central hub application for connecting different <br/>
+              systems and hosted services to the same interface for easy access as well as integrating them to work together.
+            </p>
+
+          </main>
+          
         </div>
       </section>
     </>

@@ -1,31 +1,20 @@
-import React, { useState } from 'react';
+import type { ServiceItemProps } from "../models/interfaces";
+import type { ServiceListProps } from "../models/interfaces";
 
-interface ServiceDetail{
-    id: string;
-    name: string;
-}
-
-interface ServiceList{
-    services: ServiceDetail[];
-}
-
-function ServiceItem(name: string) {
-    return <p>{ name }</p>;
+export  function ListServiceItem({ name }: ServiceItemProps) {
+    return  <li className="service_li"><button className="service_li_button">{name}</button></li>
 };
 
-function ListServiceItems({services}: ServiceList){
+export function DisplayServiceList({services}: ServiceListProps){
     
     return (
         <div>
             <ul>
                 {services.map((service) => (
-                    <li key={service.id}>
-                        {service.name}
-                    </li>
+                    <ListServiceItem key={service.id} name={service.name}/>
                 ))}
             </ul>
         </div>
     );
 };
 
-export default ListServiceItems;
