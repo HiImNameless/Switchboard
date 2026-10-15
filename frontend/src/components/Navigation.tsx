@@ -9,8 +9,9 @@ export function SideBar({services}: ServiceListProps){
             </aside>
 }
 
-export default function TopNavbar(){
-    <nav className="navbar">
-
-    </nav>
+export function TopNavbar(){
+    return  <nav className="topnav">
+                <a className="active" href="#home">Home</a>
+                <a href="#dash">Dashboard</a>
+            </nav>
 }

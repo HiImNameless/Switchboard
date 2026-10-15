@@ -1,5 +1,6 @@
 import './App.css'
 import {SideBar} from './components/Navigation.tsx';
+import {TopNavbar} from './components/Navigation.tsx';
 
 function App() {
 
@@ -12,7 +13,7 @@ function App() {
 return (
     <>
       <section id="center">
-
+        {/* <TopNavbar/> */}
         <SideBar services={services}/>
         <div className="container">
           <main className="content">
@@ -22,7 +23,6 @@ return (
               Switchboard is a  modular central hub application for connecting different <br/>
               systems and hosted services to the same interface for easy access as well as integrating them to work together.
             </p>
-
           </main>
           
         </div>
