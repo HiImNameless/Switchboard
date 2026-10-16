@@ -1,30 +1,31 @@
+import { useState } from 'react'
 import './App.css'
-import {SideBar} from './components/Navigation.tsx';
-import {TopNavbar} from './components/Navigation.tsx';
+import { TopNavbar } from './components/Navigation'
+import DashboardPage from './pages/Dashboard'
+import ServicesPage from './pages/Services'
 
 function App() {
 
-  const services = [
-    {id: "cockpit", name: "Cockpit"},
-    {id: "dockge", name: "Dockge"},
-    {id: "adguard-home", name: "Adguard Home"},
-  ];
+const [activePage, setActivePage] = useState('dashboard')
+
+const renderPage = () => {
+  switch (activePage) {
+    case 'dashboard':
+      return <DashboardPage/>;
+    case 'services':
+      return <ServicesPage/>
+  }
+}
 
 return (
     <>
-      <section id="center">
-        {/* <TopNavbar/> */}
-        <SideBar services={services}/>
-        <div className="container">
-          <main className="content">
-            <h1>Switchboard</h1>
-
-            <p>
-              Switchboard is a  modular central hub application for connecting different <br/>
-              systems and hosted services to the same interface for easy access as well as integrating them to work together.
-            </p>
+      <TopNavbar activePage={activePage} setActivePage={setActivePage}/>
+    
+      <section>
+        <div className='container'>
+          <main className='content'>
+            {renderPage()}
           </main>
-          
         </div>
       </section>
     </>

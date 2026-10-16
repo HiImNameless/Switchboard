@@ -1,17 +1,35 @@
 import { DisplayServiceList } from "./Services"
 import type { ServiceListProps } from "../models/interfaces"
+import type { ActivePage } from "../models/interfaces"
 
-export function SideBar({services}: ServiceListProps){
+export function ServiceSideBar({services, activeService, setActiveService}: ServiceListProps){
     return  <aside className="sidebar">
                 <nav>
-                <DisplayServiceList services={services}/> 
+                    <DisplayServiceList services={services} activeService={activeService} setActiveService={setActiveService}/> 
                 </nav>
             </aside>
 }
 
-export function TopNavbar(){
-    return  <nav className="topnav">
-                <a className="active" href="#home">Home</a>
-                <a href="#dash">Dashboard</a>
-            </nav>
+export function TopNavbar({activePage, setActivePage}: ActivePage){
+    return  <header>
+                <nav className="topnav">
+                    <button className={
+                            activePage === 'dashboard' ? 'active' : ''
+                        } 
+                            onClick={
+                                () => setActivePage('dashboard')
+                        }>
+                        Dashboard
+                    </button>
+                    <button className=  
+                    {
+                            activePage === 'services' ? 'active' : ''
+                        } 
+                            onClick={
+                                () => setActivePage('services')
+                        }>
+                        Services
+                    </button>
+                </nav>
+            </header>
 }
