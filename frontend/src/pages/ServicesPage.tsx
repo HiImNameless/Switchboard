@@ -1,0 +1,107 @@
+    
+import { useEffect, useState } from 'react';
+import { ServiceSideBar } from '../components/Navigation';
+import ServiceContent from '../components/Content';
+import type {Service} from '../models/interfaces';
+
+export async function GetServicesList(): Promise<Service[]> { 
+    const servicesUrl = "http://127.0.0.1:8000/api/services";
+
+    try{
+        const response = await fetch(servicesUrl); // Sends a request and awaits a response from the server
+        
+        if(!response.ok){   // Checks the status code of the request sent above, throws an error if response is not ok
+            throw new Error(`Response status: ${response.status}`);
+        }
+
+        const servicesList = await response.json(); // Reads the contents of the response body
+        return servicesList; 
+    }catch (error) {
+
+        console.error(error);
+        throw Error;
+    }
+}
+
+export default function ServicesPage(){
+    const [retrievalStatus, setRetrievalStatus] = useState
+    <
+        "loading" | 
+        "success" | 
+        "error"   |
+        "empty"
+    >
+    ("loading");
+
+    const [services, setServices] = useState<Service[]>([]);    // Creates an empty array for the services to be stored in
+    const [activeService, setActiveService] = useState(() => {  // Retrieves and sets the last selected service from browser storage
+            return localStorage.getItem('activeServiceId');
+        });
+
+    useEffect(() => {   // Loads the services into the array and saves the last active service
+        async function loadData() {
+            setRetrievalStatus("loading"); // Ensure retrievalStatus is set to loading before loading services
+            
+            try{
+                const data = await GetServicesList();
+
+                setServices(data);
+
+                localStorage.setItem('activeServiceId', activeService ?? "");
+            
+                if(!localStorage.getItem('activeServiceId') && data.length > 0) {
+                    setActiveService(data[0].id);
+                } else if (data.length === 0){
+                    setRetrievalStatus("empty");
+                    return
+                }
+            } catch (error) {
+                console.log("Caught Error");
+                setRetrievalStatus("error");
+                return
+            }
+  
+            setRetrievalStatus("success");  // Set retrievalStatus to success after retrieving services
+
+        }
+        loadData();
+    }, []);
+
+    useEffect(() => {   // Sets the activeServiceId to the Active Service in browser storage
+        if (activeService){
+            localStorage.setItem('activeServiceId', activeService);
+        }
+    }, [activeService]);
+    
+    const currentService = services.find(s => s.id === activeService) // finds the first object in services that matches the activeService's id
+
+    return  <>
+                <ServiceSideBar 
+                services={services} 
+                activeService={activeService ?? ""} 
+                setActiveService={setActiveService}
+                />
+                
+                <section className='service_section'>
+                    <div className='service_container'>
+                        <h1>Switchboard</h1>
+
+                        {retrievalStatus === "loading" ? (  // Sets content while loading services
+                            <p>Loading Services</p>
+                        ) : retrievalStatus === "error" ? (
+                            <p>An error has occurred</p>
+                        ) : retrievalStatus === "empty" ? (
+                            <p>No services could be retrieved...</p>
+                        ) : currentService ? (
+                            <ServiceContent 
+                                id={currentService.id} 
+                                name={currentService.name} 
+                                url={currentService.url}
+                            />
+                        ) : (
+                            <p>Service not found</p>
+                        )}
+                    </div>
+                </section>
+            </>
+}

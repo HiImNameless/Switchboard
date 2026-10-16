@@ -32,3 +32,8 @@ export interface ActiveService{
     activeService: string;
     setActiveService: (component: string) => void;
 }
+
+export interface ServiceContent{
+    retrievalStatus: string;
+    currentService: Service;
+}

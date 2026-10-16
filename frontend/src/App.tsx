@@ -4,8 +4,8 @@ import './App.css'
 
 import { TopNavbar } from './components/Navigation'
 
-import DashboardPage from './pages/Dashboard'
-import ServicesPage from './pages/Services'
+import DashboardPage from './pages/DashboardPage'
+import ServicesPage from './pages/ServicesPage'
 
 function App() {
 
