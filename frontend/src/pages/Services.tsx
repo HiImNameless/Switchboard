@@ -11,28 +11,30 @@ export default function ServicesPage(){
         {id: "adguard-home", name: "Adguard Home"},
     ];
 
-    const [activeService, setActiveService] = useState(() => {
+    const [activeService, setActiveService] = useState(() => {  // Retrieves the last selected service
             const saved = localStorage.getItem('activeServiceId');
-            return saved ? saved : 'cockpit';
+            return saved ? saved : services[0].id;
         });
 
-    useEffect(() => {
+    useEffect(() => {   // Saves the selected service
         localStorage.setItem('activeServiceId', activeService);
     }, [activeService]);
     
     const currentService = services.find(s => s.id === activeService) // finds the first object in services that matches the activeService's id
 
     return <>
-            <section>
                 <ServiceSideBar services={services} activeService={activeService} setActiveService={setActiveService}/>
+                
+                <section className='service_section'>
+                    <div className='service_container'>
+                        <h1>Switchboard</h1>
 
-                <h1>Switchboard</h1>
-
-                {currentService ? (
-                    <ServiceContent id={currentService.id} name={currentService.name}/>
-                ) : (
-                    <p>Service not found</p>
-                )}
-            </section>
+                        {currentService ? (
+                            <ServiceContent id={currentService.id} name={currentService.name}/>
+                        ) : (
+                            <p>Service not found</p>
+                        )}
+                    </div>
+                </section>
         </>
 }

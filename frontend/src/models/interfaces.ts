@@ -17,10 +17,9 @@ export interface ServiceListProps{
 }
 
 export interface ServiceButtonProps{
-    id: string;
     name: string;
-    activeService: string;
-    setActiveService: (component: string) => void;
+    isActive: boolean;
+    onSelect: () => void;
 }
 
 export interface ActivePage{

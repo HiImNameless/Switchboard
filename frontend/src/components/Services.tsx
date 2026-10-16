@@ -8,7 +8,11 @@ export function DisplayServiceItem({name}: ServiceItemProps){
 
 export  function ListServiceItem({ id, name, activeService, setActiveService }: ServiceItemProps) {
     return  <li className="service_li">
-                <ServiceSidebarButton id={id} name={name} activeService={activeService} setActiveService={setActiveService}/>
+                <ServiceSidebarButton 
+                name={name} 
+                isActive={activeService === id} 
+                onSelect={() => setActiveService(id)}
+                />
             </li>
 };
 

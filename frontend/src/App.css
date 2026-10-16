@@ -8,19 +8,31 @@ html, body, #root, .App {
   color: white;
 }
 
-.container{
+.app_container{
   display: flex;
   min-height:100vh;
+  align-content: center;
 }
 
-.content{
-  position: fixed;
-  top: 60px;
-  left: 250px;
-  right: auto;
+.service_section{
+  display: flex;
   flex-grow: 1;
-  min-width: 0;
-  margin-left: 250px;
+  padding-left: 250px;
+  padding-top: 60px;
+  width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.app_main{
+  flex-grow: 1;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.service_container{
+  flex-grow: 1;
+  width: 100%;
   padding: 40px;
   box-sizing: border-box;
 }
@@ -31,7 +43,7 @@ html, body, #root, .App {
   left: 0;
   bottom: 0;
   width: 250px;
-  height: 100vh;
+  height: calc(100vh - 60px);
   background-color: rgba(255, 255, 255, 0.03);
   border-right: 1px solid rgba(255, 255, 255, 0.05);
 }
@@ -81,7 +93,7 @@ html, body, #root, .App {
   color: rgb(254, 253, 255);
   text-align: center;
   padding: 16px 16px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: none;
   border-radius: 2px;
   font-size: 17px;
 }
@@ -89,6 +101,7 @@ html, body, #root, .App {
 .topnav button:hover{
   background-color: #ddd;
   color: black;
+  cursor: pointer;
 }
 
 .topnav button.active{
