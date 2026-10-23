@@ -9,25 +9,25 @@ import ServicesPage from './pages/ServicesPage'
 
 function App() {
 
-const [activePage, setActivePage] = useState(() => {
-  const saved = localStorage.getItem('activePageId');
-  return saved ? saved : 'dashboard';
-})
+  const [activePage, setActivePage] = useState(() => {
+    const saved = localStorage.getItem('activePageId');
+    return saved ? saved : 'dashboard';
+  })
 
-useEffect(() => {
-  localStorage.setItem('activePageId', activePage);
-}, [activePage]);
+  useEffect(() => {
+    localStorage.setItem('activePageId', activePage);
+  }, [activePage]);
 
-const renderPage = () => {
-  switch (activePage) {
-    case 'dashboard':
-      return <DashboardPage/>;
-    case 'services':
-      return <ServicesPage/>
+  const renderPage = () => {
+    switch (activePage) {
+      case 'dashboard':
+        return <DashboardPage/>;
+      case 'services':
+        return <ServicesPage/>
+    }
   }
-}
 
-return (
+  return (
     <>
       <TopNavbar activePage={activePage} setActivePage={setActivePage}/>
     

@@ -7,6 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': 'http://localhost:8000',
+      '/tailnet': 'https://api.tailscale.com'
     }
   }
 })
