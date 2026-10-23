@@ -5,7 +5,7 @@ import ServiceContent from '../components/Content';
 import type {Service} from '../models/interfaces';
 
 export async function GetServicesList(): Promise<Service[]> { 
-    const servicesUrl = "http://127.0.0.1:8000/api/services";
+    const servicesUrl = "/api/services";
 
     const response = await fetch(servicesUrl); // Sends a request and awaits a response from the server
         
@@ -41,12 +41,12 @@ export default function ServicesPage(){
 
                 setServices(data);
             
-                if (data.length === 0){
+                if (data.length === 0){ // Sets retrieval status to empty when the array is empty and returns
                     setRetrievalStatus("empty");
                     return
                 }
                 
-                if(!data.some(s => s.id === activeService))
+                if(!data.some(s => s.id === activeService)) // Sets the active service to the first item in the data array if the active service no longer exists in the data array
                 {
                     setActiveService(data[0].id);
                 } 
