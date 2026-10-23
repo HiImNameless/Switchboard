@@ -40,6 +40,6 @@ def health():
 def get_services():
     return services
 
-@app.get("/tailnet/services")
-async def tailnet_services():
+# @app.get("/tailnet/services")
+# async def tailnet_services():
     
