@@ -1,5 +1,5 @@
 import type { Service } from "../models/interfaces"
 
-export default function ServiceContent({id, name}: Service){
-    return <p>id: {id} | {name}</p>
+export default function ServiceContent({name, url}: Service){
+    return <iframe src={url} title={name} width="100%" height="100%"></iframe>
 }

@@ -14,17 +14,17 @@ services = [
                 {
                     "id": "cockpit",
                     "name": "Cockpit",
-                    "url":  "https://cockpit.redacted.ts.net",
+                    "url":  "https://cockpit.tail4f2004.ts.net",
                 },
                 {
                     "id": "dockge",
                     "name": "Dockge",
-                    "url":  "https://dockge.redacted.ts.net",
+                    "url":  "https://dockge.tail4f2004.ts.net",
                 },
                 {
                     "id": "adguard-home",
                     "name": "Adguard Home",
-                    "url":  "https://adguard-home.redacted.ts.net",
+                    "url":  "https://adguard-home.tail4f2004.ts.net",
                 },
             ]
 

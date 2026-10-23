@@ -79,7 +79,7 @@ export default function ServicesPage(){
                 
                 <section className='service_section'>
                     <div className='service_container'>
-                        <h1>Switchboard</h1>
+                        {/* <h1>Switchboard</h1> */}
 
                         {retrievalStatus === "loading" ? (  // Sets content while loading services
                             <p>Loading Services</p>
