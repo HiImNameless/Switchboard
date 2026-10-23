@@ -7,20 +7,14 @@ import type {Service} from '../models/interfaces';
 export async function GetServicesList(): Promise<Service[]> { 
     const servicesUrl = "http://127.0.0.1:8000/api/services";
 
-    try{
-        const response = await fetch(servicesUrl); // Sends a request and awaits a response from the server
+    const response = await fetch(servicesUrl); // Sends a request and awaits a response from the server
         
-        if(!response.ok){   // Checks the status code of the request sent above, throws an error if response is not ok
-            throw new Error(`Response status: ${response.status}`);
-        }
-
-        const servicesList = await response.json(); // Reads the contents of the response body
-        return servicesList; 
-    }catch (error) {
-
-        console.error(error);
-        throw Error;
+    if(!response.ok){   // Checks the status code of the request sent above, throws an error if response is not ok
+        throw new Error(`Response status: ${response.status}`);
     }
+
+    const servicesList = await response.json(); // Reads the contents of the response body
+    return servicesList; 
 }
 
 export default function ServicesPage(){
@@ -38,7 +32,7 @@ export default function ServicesPage(){
             return localStorage.getItem('activeServiceId');
         });
 
-    useEffect(() => {   // Loads the services into the array and saves the last active service
+    useEffect(() => { 
         async function loadData() {
             setRetrievalStatus("loading"); // Ensure retrievalStatus is set to loading before loading services
             
@@ -46,15 +40,16 @@ export default function ServicesPage(){
                 const data = await GetServicesList();
 
                 setServices(data);
-
-                localStorage.setItem('activeServiceId', activeService ?? "");
             
-                if(!localStorage.getItem('activeServiceId') && data.length > 0) {
-                    setActiveService(data[0].id);
-                } else if (data.length === 0){
+                if (data.length === 0){
                     setRetrievalStatus("empty");
                     return
                 }
+                
+                if(!data.some(s => s.id === activeService))
+                {
+                    setActiveService(data[0].id);
+                } 
             } catch (error) {
                 console.log("Caught Error");
                 setRetrievalStatus("error");
@@ -65,13 +60,13 @@ export default function ServicesPage(){
 
         }
         loadData();
-    }, []);
+    }, []); // Runs once after first page render
 
     useEffect(() => {   // Sets the activeServiceId to the Active Service in browser storage
         if (activeService){
             localStorage.setItem('activeServiceId', activeService);
         }
-    }, [activeService]);
+    }, [activeService]);    // Runs every time activeService variable changes (After first page render)
     
     const currentService = services.find(s => s.id === activeService) // finds the first object in services that matches the activeService's id
 
